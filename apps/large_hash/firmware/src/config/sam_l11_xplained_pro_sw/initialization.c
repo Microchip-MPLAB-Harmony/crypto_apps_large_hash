@@ -54,6 +54,7 @@
 // Section: Configuration Bits
 // ****************************************************************************
 // ****************************************************************************
+#pragma config NVMCTRL_SULCK = 0x7
 #pragma config NVMCTRL_NSULCK = 0x7
 #pragma config BOD33_LEVEL = 0x6
 #pragma config BOD33_DIS = CLEAR
@@ -123,6 +124,7 @@ const DRV_USART_PLIB_INTERFACE drvUsart0PlibAPI = {
     .read = (DRV_USART_PLIB_READ)SERCOM0_USART_Read,
     .readIsBusy = (DRV_USART_PLIB_READ_IS_BUSY)SERCOM0_USART_ReadIsBusy,
     .readCountGet = (DRV_USART_PLIB_READ_COUNT_GET)SERCOM0_USART_ReadCountGet,
+	.readAbort = (DRV_USART_PLIB_READ_ABORT)SERCOM0_USART_ReadAbort,
     .writeCallbackRegister = (DRV_USART_PLIB_WRITE_CALLBACK_REG)SERCOM0_USART_WriteCallbackRegister,
     .write = (DRV_USART_PLIB_WRITE)SERCOM0_USART_Write,
     .writeIsBusy = (DRV_USART_PLIB_WRITE_IS_BUSY)SERCOM0_USART_WriteIsBusy,
@@ -167,7 +169,6 @@ const DRV_USART_INIT drvUsart0InitData =
  */
 void TC0_TimerCallbackRegister
     (SYS_TIME_PLIB_CALLBACK callback, uintptr_t context){}
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -244,13 +245,13 @@ void SYS_Initialize ( void* data )
 
     NVMCTRL_Initialize();
 
-	BSP_Initialize();
-    EVSYS_Initialize();
-
     SERCOM0_USART_Initialize();
+
+    EVSYS_Initialize();
 
     TC0_TimerInitialize();
 
+	BSP_Initialize();
 
     sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)&drvUsart0InitData);
 

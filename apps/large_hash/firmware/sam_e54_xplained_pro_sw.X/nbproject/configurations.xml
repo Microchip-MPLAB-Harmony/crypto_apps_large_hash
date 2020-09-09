@@ -22,6 +22,11 @@
             <itemPath>../src/config/sam_e54_xplained_pro_sw/driver/driver.h</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/driver/driver_common.h</itemPath>
           </logicalFolder>
+          <logicalFolder name="f6" displayName="osal" projectFiles="true">
+            <itemPath>../src/config/sam_e54_xplained_pro_sw/osal/osal.h</itemPath>
+            <itemPath>../src/config/sam_e54_xplained_pro_sw/osal/osal_definitions.h</itemPath>
+            <itemPath>../src/config/sam_e54_xplained_pro_sw/osal/osal_impl_basic.h</itemPath>
+          </logicalFolder>
           <logicalFolder name="f1" displayName="peripheral" projectFiles="true">
             <logicalFolder name="f5" displayName="clock" projectFiles="true">
               <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/clock/plib_clock.h</itemPath>
@@ -80,14 +85,10 @@
           <itemPath>../src/config/sam_e54_xplained_pro_sw/toolchain_specifics.h</itemPath>
           <itemPath>../src/config/sam_e54_xplained_pro_sw/definitions.h</itemPath>
           <itemPath>../src/config/sam_e54_xplained_pro_sw/config.h</itemPath>
+          <itemPath>../src/config/sam_e54_xplained_pro_sw/device.h</itemPath>
           <itemPath>../src/config/sam_e54_xplained_pro_sw/user.h</itemPath>
           <itemPath>../src/config/sam_e54_xplained_pro_sw/configuration.h</itemPath>
         </logicalFolder>
-      </logicalFolder>
-      <logicalFolder name="f4" displayName="osal" projectFiles="true">
-        <itemPath>../src/config/sam_e54_xplained_pro_sw/osal/osal.h</itemPath>
-        <itemPath>../src/config/sam_e54_xplained_pro_sw/osal/osal_definitions.h</itemPath>
-        <itemPath>../src/config/sam_e54_xplained_pro_sw/osal/osal_impl_basic.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="packs" projectFiles="true">
         <logicalFolder name="f1" displayName="ATSAME54P20A_DFP" projectFiles="true">
@@ -135,8 +136,6 @@
           <logicalFolder name="f2" displayName="pio" projectFiles="true">
             <itemPath>../src/packs/ATSAME54P20A_DFP/pio/same54p20a.h</itemPath>
           </logicalFolder>
-          <itemPath>../src/packs/ATSAME54P20A_DFP/device.h</itemPath>
-          <itemPath>../src/packs/ATSAME54P20A_DFP/atsame54p20a_compat.h</itemPath>
           <itemPath>../src/packs/ATSAME54P20A_DFP/atsame54p20a.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="CMSIS" projectFiles="true">
@@ -152,6 +151,7 @@
                 <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cmsis_armclang_ltm.h</itemPath>
                 <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/core_cm4.h</itemPath>
                 <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/mpu_armv7.h</itemPath>
+                <itemPath>../src/packs/CMSIS/CMSIS/Core/Include/cachel1_armv7.h</itemPath>
               </logicalFolder>
             </logicalFolder>
           </logicalFolder>
@@ -298,6 +298,13 @@
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="config" projectFiles="true">
+        <logicalFolder name="f1"
+                       displayName="sam_e54_xplained_pro_sw"
+                       projectFiles="true">
+          <itemPath>../src/config/sam_e54_xplained_pro_sw/ATSAME54P20A.ld</itemPath>
+        </logicalFolder>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -473,10 +480,12 @@
                    projectFiles="false">
       <logicalFolder name="f1" displayName="wolfcrypt" projectFiles="true">
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/misc.c</itemPath>
+        <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/evp.c</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
       <itemPath>../src/config/sam_e54_xplained_pro_sw/harmony.prj</itemPath>
       <itemPath>../src/config/sam_e54_xplained_pro_sw/sam_e54_xplained_pro_sw.xml</itemPath>
+      <itemPath>../src/config/sam_e54_xplained_pro_sw/harmony-manifest-success.yml</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -490,14 +499,14 @@
         <targetDevice>ATSAME54P20A</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>pk4hybrid</platformTool>
+        <platformTool>EdbgTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>2.20</languageToolchainVersion>
+        <languageToolchainVersion>2.41</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
         <pack name="CMSIS" vendor="ARM" version="5.0.1"/>
-        <pack name="SAME54_DFP" vendor="Microchip" version="3.1.43"/>
+        <pack name="SAME54_DFP" vendor="Microchip" version="3.2.56"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -559,7 +568,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/sam_e54_xplained_pro_sw;../src/packs/ATSAME54P20A_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl"/>
+                  value="../src/third_party/wolfssl/wolfssl;../src/third_party/wolfssl;../src;../src/config/sam_e54_xplained_pro_sw;../src/packs/ATSAME54P20A_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -569,7 +578,7 @@
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros"
-                  value="HAVE_CONFIG_H;WOLFSSL_IGNORE_FILE_WARN"/>
+                  value="WOLFSSL_IGNORE_FILE_WARN;HAVE_CONFIG_H"/>
         <property key="strict-ansi" value="false"/>
         <property key="support-ansi" value="false"/>
         <property key="toplevel-reordering" value=""/>
@@ -655,7 +664,8 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
-        <property key="extra-include-directories" value=""/>
+        <property key="extra-include-directories"
+                  value="../src;../src/config/sam_e54_xplained_pro_sw;../src/packs/ATSAME54P20A_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -680,6 +690,7 @@
         <property key="mdtcm" value=""/>
         <property key="mitcm" value=""/>
         <property key="mstacktcm" value="false"/>
+        <property key="omit-pack-options" value="1"/>
         <property key="relaxed-math" value="false"/>
         <property key="save-temps" value="false"/>
         <property key="wpo-lto" value="false"/>
@@ -1229,6 +1240,64 @@
                   value=""/>
         <property key="warningmessagebreakoptions.warningmessages" value="holdstate"/>
       </Simulator>
+      <pk4hybrid>
+        <property key="AutoSelectMemRanges" value="auto"/>
+        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
+        <property key="ToolFirmwareFilePath"
+                  value="Press to browse for a specific firmware version"/>
+        <property key="ToolFirmwareOption.UpdateOptions"
+                  value="ToolFirmwareOption.UseLatest"/>
+        <property key="ToolFirmwareToolPack"
+                  value="Press to select which tool pack to use"/>
+        <property key="communication.activationmode" value="nohv"/>
+        <property key="communication.interface" value="swd"/>
+        <property key="communication.interface.jtag" value="2wire"/>
+        <property key="communication.speed" value="2.000"/>
+        <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="memories.aux" value="false"/>
+        <property key="memories.bootflash" value="true"/>
+        <property key="memories.configurationmemory" value="true"/>
+        <property key="memories.configurationmemory2" value="true"/>
+        <property key="memories.dataflash" value="true"/>
+        <property key="memories.eeprom" value="true"/>
+        <property key="memories.exclude.configurationmemory" value="true"/>
+        <property key="memories.flashdata" value="true"/>
+        <property key="memories.id" value="true"/>
+        <property key="memories.instruction.ram.ranges"
+                  value="${memories.instruction.ram.ranges}"/>
+        <property key="memories.programmemory" value="true"/>
+        <property key="memories.programmemory.ranges" value="0-fffff"/>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmerToGoImageName" value="sam_e54_xplained_pro_sw_ptg"/>
+        <property key="programoptions.donoteraseauxmem" value="false"/>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.ledbrightness" value="5"/>
+        <property key="programoptions.pgcconfig" value="pull down"/>
+        <property key="programoptions.pgcresistor.value" value="4.7"/>
+        <property key="programoptions.pgdconfig" value="pull down"/>
+        <property key="programoptions.pgdresistor.value" value="4.7"/>
+        <property key="programoptions.pgmentry.voltage" value="low"/>
+        <property key="programoptions.pgmspeed" value="Med"/>
+        <property key="programoptions.preservedataflash" value="false"/>
+        <property key="programoptions.preservedataflash.ranges"
+                  value="${memories.dataflash.default}"/>
+        <property key="programoptions.preserveeeprom" value="false"/>
+        <property key="programoptions.preserveeeprom.ranges" value=""/>
+        <property key="programoptions.preserveprogram.ranges" value=""/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.preserveuserid" value="false"/>
+        <property key="programoptions.programcalmem" value="false"/>
+        <property key="programoptions.programuserotp" value="false"/>
+        <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
+        <property key="programoptionsedbg.eraseb4program" value="true"/>
+        <property key="ptgProgramImage" value="true"/>
+        <property key="ptgSendImage" value="true"/>
+        <property key="toolpack.updateoptions"
+                  value="toolpack.updateoptions.uselatestoolpack"/>
+        <property key="toolpack.updateoptions.packversion"
+                  value="Press to select which tool pack to use"/>
+        <property key="voltagevalue" value="3.25"/>
+      </pk4hybrid>
     </conf>
   </confs>
 </configurationDescriptor>
