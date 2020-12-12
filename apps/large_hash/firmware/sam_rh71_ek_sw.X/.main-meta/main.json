@@ -1,0 +1,79 @@
+{
+	"metaDataVersion": "1.0.0",
+	"category": "com.microchip.ide.project",
+	"content": {
+		"metaDataVersion": "1.1.0",
+		"name": "com.microchip.mcu32.mplabx.project.crypto_apps_large_hash_large_hash_sam_rh71_ek_sw",
+		"version": "3.6.1",
+		"displayName": "Large Hash Example for SAM RH71 Family",
+		"projectName": "sam_rh71_ek_sw",
+		"shortDescription": "This application demonstrates how to execute hashes on large blocks of data. In this case, the demonstration performs MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashing on a 512 * 1024 block of the letter 'a'.  After the hashing has been performed, the application outputs via the system console the results of the hashing, and the time it took to perform each form. It then compares the generated hashes with known values for each algorithm. If all tests pass a message is presented through the system console. If any tests fail a corresponding message is presented through the system console.",
+		"ide": {
+			"name": "MPLABX",
+			"semverRange": ">=5.45.0"
+		},
+		"compiler": [
+			{
+				"name": "XC32",
+				"semverRange": ">=2.50.0"
+			}
+		],
+		"dfp": {
+			"name": "SAMRH71_DFP",
+			"semverRange": "^2.0.89"
+		},
+		"configurator": {
+			"name": "MHC",
+			"semverRange": ">=3.5.1"
+		},
+		"device": {
+			"metaDataVersion": "1.0.0",
+			"category": "com.microchip.portal.contentRef",
+			"content": {
+				"metaDataVersion": "1.0.0",
+				"category": "com.microchip.device",
+				"name": "ATSAMRH71F20C",
+				"versionRange": "*"
+			}
+		},
+		"author": "Microchip",
+		"subcategories": [
+			[
+				"Development Kit", "SAM RH71 Evaluation Kit"
+			],
+			[
+				"Harmony", "Middleware", "Crypto", "LARGE_HASH"
+			],
+			[
+				"Middleware", "Crypto", "LARGE_HASH"
+			]
+		],
+		"peripherals": [
+			"Crypto"
+		],
+		"keywords": [
+			"MHC",
+			"Harmony",
+			"Middleware",
+			"Crypto",
+			"ATSAMRH71F20C",
+			"SAM RH71 Family",
+			"Crypto",
+			"AES",
+			"DES",
+			"SHA",
+			"HMAC"
+		],
+		"additionalData": {
+			"longDescription": {
+				"metaDataVersion": "1.0.0",
+				"category": "com.microchip.portal.fileRef",
+				"content": {
+					"metaDataVersion": "1.0.0",
+					"fileName": "./../../readme.md",
+					"mimeType": "text/markdown"
+				}
+			}
+		}
+	}
+}
